@@ -1,0 +1,20 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle (centered) -->
+  <circle cx="64" cy="64" r="60" fill="#3B82F6"/>
+  
+  <!-- T Letter (precisely centered) -->
+  <rect x="52" y="44" width="24" height="8" rx="4" fill="white"/>
+  <rect x="62" y="44" width="4" height="28" rx="2" fill="white"/>
+  
+  <!-- N Letter (mathematically aligned) -->
+  <path d="M76 44V76L96 44V76" 
+        stroke="white" 
+        stroke-width="10" 
+        stroke-linecap="square"/>
+  
+  <!-- Balance element (optical center adjustment) -->
+  <circle cx="58" cy="84" r="5" fill="white"/>
+  
+  <!-- Center guide (uncomment to verify alignment) -->
+  <!-- <path d="M64 20V108M20 64H108" stroke="#ffffff30" stroke-width="1"/> -->
+</svg>
