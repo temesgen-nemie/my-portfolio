@@ -1,7 +1,14 @@
+import { useState, useEffect } from "react";
 import { FiCalendar, FiAward, FiCode, FiUsers } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const Experience = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   const experiences = [
     {
       role: "Intern",
@@ -21,7 +28,7 @@ const Experience = () => {
       period: "May 2024 - Jun 2024",
       description: [
         "Developed an AI-based disease surveillance system prototype in 48 hours.",
-        "Implemented real-time data visualization and predictive analytics.",,
+        "Implemented real-time data visualization and predictive analytics.",
       ],
       icon: <FiAward className="text-xl" />,
       color: "text-purple-500"
@@ -43,15 +50,17 @@ const Experience = () => {
   return (
     <section id="experience" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-16"
-        >
-          Professional <span className="text-blue-600 dark:text-blue-400">Experience</span>
-        </motion.h2>
+        {isHydrated && (
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-16"
+          >
+            Professional <span className="text-blue-600 dark:text-blue-400">Experience</span>
+          </motion.h2>
+        )}
         
         <div className="relative">
           {/* Vertical timeline line */}
@@ -61,8 +70,8 @@ const Experience = () => {
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={isHydrated ? { opacity: 0, y: 20 } : false}
+                whileInView={isHydrated ? { opacity: 1, y: 0 } : false}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="relative pl-10 md:pl-0"
@@ -90,7 +99,7 @@ const Experience = () => {
                     {exp.description.map((item, i) => (
                       <motion.li 
                         key={i}
-                        whileHover={{ x: 5 }}
+                        whileHover={isHydrated ? { x: 5 } : null}
                         className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
                       >
                         <span className={`${exp.color} mt-1.5 flex-shrink-0`}>•</span>

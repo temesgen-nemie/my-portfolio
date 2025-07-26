@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { FiX } from "react-icons/fi";
 import internshipCert from "../assets/internship.jpg";
 import projectCert from "../assets/project.jpg";
@@ -22,48 +22,41 @@ const About = () => {
     {
       title: "EagleLion System Technology Internship",
       image: internshipCert,
-      description:
-        "Completed internship with demonstrated technical and communication skills",
+      description: "Completed internship with demonstrated technical and communication skills",
       date: "Sep 2024",
-      details:
-        "Recognized for strong commitment and professionalism during internship at EagleLion System Technology",
+      details: "Recognized for strong commitment and professionalism during internship at EagleLion System Technology",
     },
     {
       title: "3rd Best Project Award",
       image: projectCert,
       description: "Awarded 3rd place for Outstanding Final Year Project",
       date: "Jun 2025",
-      details:
-        "Recognized for exceptional innovation and technical excellence for the project 'Digital Platform for Donation' by Faculty of Computing and Informatics",
+      details: "Recognized for exceptional innovation and technical excellence for the project 'Digital Platform for Donation' by Faculty of Computing and Informatics",
     },
     {
       title: "Graduated with great distinction",
       image: tempo,
-      description:
-        "Graduated with strong academic performance and hands-on experience in software.",
+      description: "Graduated with strong academic performance and hands-on experience in software.",
       date: "2025",
-      details:
-        "Graduated with strong academic performance and handson experience in software engineering.",
+      details: "Graduated with strong academic performance and handson experience in software engineering.",
     },
     {
       title: "Cisco Certificate of Completion",
       image: cisco,
-      description:
-        "Completed Graphics Design Training under the Cisco Networking Academy at Jimma University, gaining practical skills in visual communication, branding, and digital content",
+      description: "Completed Graphics Design Training under the Cisco Networking Academy at Jimma University, gaining practical skills in visual communication, branding, and digital content",
       date: "2025",
-      details:
-        "Completed Graphics Design Training under the Cisco Networking Academy at Jimma University, gaining practical skills in visual communication, branding, and digital content",
+      details: "Completed Graphics Design Training under the Cisco Networking Academy at Jimma University, gaining practical skills in visual communication, branding, and digital content",
     },
   ];
 
-  const openModal = (certificate) => {
+  const openModal = useCallback((certificate) => {
     setSelectedCertificate(certificate);
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
   return (
     <section id="about" className="py-10 bg-white dark:bg-gray-900">
@@ -115,19 +108,24 @@ const About = () => {
           {/* Right Column */}
           <div className="md:w-1/2">
             <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-              Key Achievements <span >(click to view details)</span>
+              Key Achievements <span>(click to view details)</span>
             </h3>
-            <ul className="space-y-4 ">
+            <ul className="space-y-4">
               {certificates.map((cert, index) => (
-                <li key={index} className="flex items-start  gap-4">
+                <li key={index} className="flex items-start gap-4">
                   <button
                     onClick={() => openModal(cert)}
                     className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all"
+                    aria-label={`View ${cert.title} certificate`}
                   >
                     <img
                       src={cert.image}
                       alt={cert.title}
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      width={64}
+                      height={64}
                     />
                   </button>
                   <div>
@@ -159,6 +157,7 @@ const About = () => {
                   <button
                     onClick={closeModal}
                     className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100 p-1"
+                    aria-label="Close certificate modal"
                   >
                     <FiX className="w-6 h-6" />
                   </button>
@@ -169,6 +168,8 @@ const About = () => {
                     src={selectedCertificate.image}
                     alt={selectedCertificate.title}
                     className="w-full h-auto"
+                    loading="eager"
+                    decoding="sync"
                   />
                 </div>
 

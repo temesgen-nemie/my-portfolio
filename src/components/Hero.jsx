@@ -1,12 +1,20 @@
+import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import mypic from "../assets/img.jpg";
 import mycv from "../assets/Temesgen_Nemie_Updated_CV.pdf";
+
 const Hero = () => {
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900"
+      className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pt-16"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
         {/* Text Content (Left Side) */}
@@ -15,19 +23,21 @@ const Hero = () => {
             Hi, I'm <span className="text-blue-600">Temesgen Nemie</span>
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-6">
-            <TypeAnimation
-              sequence={[
-                "Software Engineer",
-                1000,
-                "Frontend Developer",
-                1000,
-                "Problem Solver",
-                1000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
+            {isHydrated && (
+              <TypeAnimation
+                sequence={[
+                  "Software Engineer",
+                  1000,
+                  "Frontend Developer",
+                  1000,
+                  "Problem Solver",
+                  1000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
+            )}
           </h2>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto md:mx-0">
             Building scalable, user-centered applications with React, Next.js,
@@ -72,14 +82,16 @@ const Hero = () => {
             <a
               href="https://github.com/temesgen-nemie"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
             >
               <FaGithub className="h-6 w-6 text-gray-700 dark:text-gray-300 hover:text-blue-600" />
             </a>
             <a
               href="https://linkedin.com/in/temesgen-nemie"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
             >
               <FaLinkedin className="h-6 w-6 text-blue-600 dark:text-blue-400 hover:text-blue-700" />
             </a>
@@ -96,6 +108,10 @@ const Hero = () => {
                 src={mypic}
                 alt="Temesgen Nemie"
                 className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width="384"
+                height="384"
               />
             </div>
           </div>
