@@ -12,25 +12,19 @@ const Contact = () => {
     setIsSending(true);
 
     try {
+      const formData = new FormData(e.target);
       const response = await fetch(import.meta.env.VITE_FORMSPREE_ENDPOINT, {
         method: "POST",
+        body: formData,
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: e.target.user_name.value,
-          email: e.target.user_email.value,
-          message: e.target.message.value
-        })
+          'Accept': 'application/json'
+        }
       });
 
       if (response.ok) {
         setIsSent(true);
         form.current.reset();
         setTimeout(() => setIsSent(false), 3000);
-      } else {
-        throw new Error('Failed to send');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -74,8 +68,14 @@ const Contact = () => {
             <form 
               ref={form}
               onSubmit={sendEmail}
+              action={import.meta.env.VITE_FORMSPREE_ENDPOINT}
+              method="POST"
               className="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
             >
+              {/* Formspree hidden fields */}
+              <input type="text" name="_gotcha" className="hidden" />
+              <input type="hidden" name="_subject" value="New message from your portfolio!" />
+              
               <div>
                 <label
                   htmlFor="name"
@@ -85,7 +85,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="text"
-                  name="user_name"
+                  name="name"
                   id="name"
                   required
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
@@ -101,7 +101,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="email"
-                  name="user_email"
+                  name="email"
                   id="email"
                   required
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
@@ -181,7 +181,8 @@ const Contact = () => {
                     </h4>
                     <a 
                       href="mailto:temen9020@gmail.com" 
-                   className="text-sm sm:text-base md:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      className="text-sm sm:text-base md:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
                       temen9020@gmail.com
                     </a>
                   </div>
@@ -202,7 +203,9 @@ const Contact = () => {
                       href="https://github.com/temesgen-nemie"
                       target="_blank"
                       rel="noreferrer"
-    className="text-sm sm:text-base md:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"> github.com/temesgen-nemie
+                      className="text-sm sm:text-base md:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
+                      github.com/temesgen-nemie
                     </a>
                   </div>
                 </motion.div>
@@ -222,7 +225,9 @@ const Contact = () => {
                       href="https://linkedin.com/in/temesgen-nemie"
                       target="_blank"
                       rel="noreferrer"
-                   className="text-sm sm:text-base md:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">  linkedin.com/in/temesgen-nemie
+                      className="text-sm sm:text-base md:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
+                      linkedin.com/in/temesgen-nemie
                     </a>
                   </div>
                 </motion.div>
