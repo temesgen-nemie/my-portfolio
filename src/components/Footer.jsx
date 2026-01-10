@@ -15,13 +15,13 @@ const Footer = () => {
     },
     {
       icon: <FaEnvelope className="text-xl" />,
-      url: "mailto:temen9020@gmail.com",
+      url: "mailto:temesgennemie@gmail.com",
       name: "Email"
     }
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-800 text-white pt-12 pb-6">
+    <footer className="bg-gray-50 dark:bg-gray-900/50 pt-12 pb-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Animated divider */}
         <motion.div 
@@ -42,10 +42,10 @@ const Footer = () => {
             transition={{ delay: 0.2 }}
             className="mb-6 md:mb-0"
           >
-            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-500">
               Temesgen Nemie
             </h2>
-            <p className="text-gray-400 mt-2">Building digital experiences</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Building digital experiences</p>
           </motion.div>
 
           {/* Social links */}
@@ -60,7 +60,7 @@ const Footer = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="text-gray-400 hover:text-white transition-colors duration-300"
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors duration-300 transform hover:scale-110"
                 aria-label={link.name}
               >
                 {link.icon}
@@ -75,12 +75,12 @@ const Footer = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-4 pt-6 border-t border-gray-800 text-center text-gray-500 text-sm"
+          className="mt-12 pt-6 border-t border-gray-200 dark:border-gray-800 text-center text-gray-500 dark:text-gray-500 text-sm"
         >
           <p>
             © {new Date().getFullYear()} Temesgen Nemie. All rights reserved.
           </p>
-          <p className="mt-2">
+          <p className="mt-2 text-gray-400 dark:text-gray-600">
             Ethiopia
           </p>
         </motion.div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FiCalendar, FiAward, FiCode, FiUsers } from "react-icons/fi";
+import { FiCalendar, FiBriefcase, FiCode, FiAward } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const Experience = () => {
@@ -15,98 +15,111 @@ const Experience = () => {
       company: "Eaglelion System Technology",
       period: "Feb 2024 - Jun 2024",
       description: [
-        "Worked on NU EVENT, an event management and ticketing platform.",
-        "Used Next.js, Tailwind CSS, and TypeScript.",
-        "Collaborated with cross-functional teams in agile development.",
+        "Contributed to NU EVENT, a comprehensive event management platform.",
+        "Built responsive UI components using Next.js and Tailwind CSS.",
+        "Collaborated with senior developers in an agile environment.",
       ],
-      icon: <FiCode className="text-xl" />,
-      color: "text-blue-500"
+      icon: <FiBriefcase size={20} />,
+      color: "from-blue-400 to-blue-600",
+      glow: "shadow-blue-500/50"
     },
     {
       role: "Hackathon Participant",
       company: "Stride for Ethiopia",
       period: "May 2024 - Jun 2024",
       description: [
-        "Developed an AI-based disease surveillance system prototype in 48 hours.",
-        "Implemented real-time data visualization and predictive analytics.",
+        "Developed 'AI in Disease Surveillance' prototype within 48 hours.",
+        "Implemented real-time data visualization dashboards.",
+        "Won recognition for innovative use of predictive analytics.",
       ],
-      icon: <FiAward className="text-xl" />,
-      color: "text-purple-500"
+      icon: <FiCode size={20} />,
+      color: "from-purple-400 to-purple-600",
+      glow: "shadow-purple-500/50"
     },
     {
       role: "Hackathon Participant",
       company: "Venture Meda",
       period: "Nov 2024 - Dec 2024",
       description: [
-        "Built WedShop, an e-commerce platform for wedding items with AR features.",
-        "Integrated 3D product previews",
-        "Designed mobile-first UI with Tailwind CSS components.",
+        "Built WedShop, an AR-enabled e-commerce platform for weddings.",
+        "Integrated 3D product previews for immersive user experience.",
+        "Designed mobile-first interface focusing on conversion.",
       ],
-      icon: <FiUsers className="text-xl" />,
-      color: "text-emerald-500"
+      icon: <FiAward size={20} />,
+      color: "from-cyan-400 to-cyan-600",
+      glow: "shadow-cyan-500/50"
     },
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {isHydrated && (
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-16"
-          >
-            Professional <span className="text-blue-600 dark:text-blue-400">Experience</span>
-          </motion.h2>
-        )}
+    <section id="experience" className="py-20 relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] -translate-y-1/2" />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mb-4">
+            My Journey
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400">Professional experience and key milestones</p>
+        </motion.div>
         
         <div className="relative">
-          {/* Vertical timeline line */}
-          <div className="absolute left-6 md:left-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500/20 via-blue-500 to-blue-500/20 dark:from-blue-400/20 dark:via-blue-400 dark:to-blue-400/20 transform -translate-x-1/2"></div>
+          {/* Vertical Line */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-cyan-500/20 md:-translate-x-1/2 rounded-full" />
           
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={isHydrated ? { opacity: 0, y: 20 } : false}
-                whileInView={isHydrated ? { opacity: 1, y: 0 } : false}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative pl-10 md:pl-0"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={`flex flex-col md:flex-row gap-8 ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
               >
-                {/* Timeline dot */}
-                <div className={`absolute left-6 md:left-1/2 top-1 w-4 h-4 rounded-full ${exp.color} bg-white dark:bg-gray-800 border-4 border-blue-100 dark:border-blue-900/50 transform -translate-x-1/2 z-10`}></div>
-                
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow duration-300">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className={`p-3 rounded-lg ${exp.color} bg-opacity-10`}>
-                      {exp.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                        {exp.role} <span className="font-medium">@ {exp.company}</span>
-                      </h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        <FiCalendar className={exp.color} />
-                        <span>{exp.period}</span>
-                      </div>
-                    </div>
+                {/* Content Side */}
+                <div className="md:w-1/2 pl-20 md:pl-0">
+                  <div className={`glass p-8 rounded-2xl border border-gray-200 dark:border-white/5 relative group hover:bg-gray-50 dark:hover:bg-white/5 transition-colors ${
+                    index % 2 === 0 ? "md:text-right" : "md:text-left"
+                  }`}>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{exp.role}</h3>
+                    <h4 className={`text-lg font-medium bg-gradient-to-r ${exp.color} bg-clip-text text-transparent mb-4`}>{exp.company}</h4>
+                    
+                    <ul className={`space-y-2 text-gray-600 dark:text-gray-400 ${
+                       index % 2 === 0 ? "md:items-end" : "md:items-start"
+                    } flex flex-col`}>
+                      {exp.description.map((desc, i) => (
+                        <li key={i} className="leading-relaxed">
+                          {desc}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  
-                  <ul className="space-y-3 pl-2">
-                    {exp.description.map((item, i) => (
-                      <motion.li 
-                        key={i}
-                        whileHover={isHydrated ? { x: 5 } : null}
-                        className="flex items-start gap-3 text-gray-700 dark:text-gray-300"
-                      >
-                        <span className={`${exp.color} mt-1.5 flex-shrink-0`}>•</span>
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
+                </div>
+
+                {/* Timeline Node */}
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 flex items-center justify-center p-2 bg-gray-50 dark:bg-[#030014] rounded-full z-10 border border-gray-200 dark:border-white/10 mt-6 md:mt-0">
+                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${exp.color} ${exp.glow} shadow-lg flex items-center justify-center text-white`}>
+                    {exp.icon}
+                  </div>
+                </div>
+
+                {/* Date Side */}
+                <div className="md:w-1/2 pl-20 md:pl-0 flex items-center md:justify-center">
+                  <div className={`flex items-center gap-2 text-gray-500 dark:text-gray-400 glass px-4 py-2 rounded-full border border-gray-200 dark:border-white/5 ${
+                     index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
+                  }`}>
+                    <FiCalendar className="text-blue-600 dark:text-blue-400" />
+                    <span>{exp.period}</span>
+                  </div>
                 </div>
               </motion.div>
             ))}

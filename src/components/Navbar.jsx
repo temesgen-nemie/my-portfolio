@@ -31,84 +31,90 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed w-full z-50 ${
-        scrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm"
-          : "bg-white dark:bg-gray-900"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className={`fixed top-4 sm:top-6 left-0 right-0 mx-auto w-[95%] max-w-5xl z-50 transition-all duration-300 ${
+        scrolled || isOpen ? "translate-y-0" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          {/* Logo with cool hover effect */}
-          <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
+      <div 
+        className={`rounded-full px-6 py-3 transition-all duration-300 border ${
+          scrolled || isOpen 
+            ? "glass-heavy shadow-lg shadow-purple-500/10 border-gray-200 dark:border-white/10" 
+            : "glass backdrop-blur-sm bg-opacity-50 border-transparent"
+        }`}
+      >
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <motion.div 
+            whileHover={{ scale: 1.05 }} 
+            className="flex-shrink-0"
+          >
             <a
               href="#"
-              className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              className="text-2xl font-bold tracking-tighter bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 dark:from-blue-400 dark:via-purple-500 dark:to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
-              Temesgen Nemie
+              TN.
             </a>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <motion.a
+              <a
                 key={link.name}
                 href={link.href}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="text-gray-900 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors group"
               >
                 {link.name}
-              </motion.a>
+                <span className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500 dark:via-purple-500 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+              </a>
             ))}
+          </div>
+
+          {/* Actions */}
+          <div className="hidden md:flex items-center space-x-4">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="p-2 text-gray-600 dark:text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
+              aria-label="Toggle dark mode"
+              suppressHydrationWarning
+            >
+              {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
             
-            {/* Social + Dark Mode */}
-            <div className="flex items-center space-x-4 ml-4">
-              <motion.button
-                onClick={() => setDarkMode(!darkMode)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-full"
-                aria-label="Toggle dark mode"
-                suppressHydrationWarning
+            <div className="h-6 w-px bg-gray-300 dark:bg-white/10" />
+
+            <div className="flex space-x-2">
+              <motion.a
+                href="https://github.com/temesgen-nemie"
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ y: -2 }}
+                className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                aria-label="GitHub"
               >
-                {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
-              </motion.button>
-              
-              <motion.div className="flex space-x-3">
-                <motion.a
-                  href="https://github.com/temesgen-nemie"
-                  target="_blank"
-                  rel="noreferrer"
-                  whileHover={{ y: -2 }}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 p-2"
-                  aria-label="GitHub"
-                >
-                  <FaGithub size={18} />
-                </motion.a>
-                <motion.a
-                  href="https://linkedin.com/in/temesgen-nemie"
-                  target="_blank"
-                  rel="noreferrer"
-                  whileHover={{ y: -2 }}
-                  className="text-blue-600 dark:text-blue-400 hover:text-blue-700 p-2"
-                  aria-label="LinkedIn"
-                >
-                  <FaLinkedin size={18} />
-                </motion.a>
-              </motion.div>
+                <FaGithub size={20} />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/in/temesgen-nemie"
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ y: -2 }}
+                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin size={20} />
+              </motion.a>
             </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-3">
-            <button
+          <div className="md:hidden flex items-center space-x-4">
+             <button
               onClick={() => setDarkMode(!darkMode)}
-              className="p-2 text-gray-700 dark:text-gray-300"
+              className="text-gray-600 dark:text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
               aria-label="Toggle dark mode"
               suppressHydrationWarning
             >
@@ -116,7 +122,7 @@ const Navbar = () => {
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 dark:text-gray-300 p-2"
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors focus:outline-none"
               aria-label="Toggle menu"
               suppressHydrationWarning
             >
@@ -126,46 +132,36 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu (Animated) */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white dark:bg-gray-800 overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 right-0 mt-2 p-2"
           >
-            <div className="px-4 pt-2 pb-4 space-y-2">
-              {navLinks.map((link) => (
+            <div className="glass-heavy rounded-2xl p-4 space-y-2 border border-gray-200 dark:border-white/10 shadow-2xl overflow-hidden">
+               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  whileTap={{ scale: 0.95 }}
-                  className="block px-3 py-3 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md font-medium"
+                  className="block px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 rounded-xl transition-all font-medium"
                 >
                   {link.name}
                 </motion.a>
               ))}
-              <div className="flex space-x-4 pt-2 px-3">
-                <a
-                  href="https://github.com/temesgen-nemie"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600"
-                  aria-label="GitHub"
-                >
-                  <FaGithub size={20} />
+              <div className="pt-4 mt-2 border-t border-gray-200 dark:border-white/10 flex justify-center space-x-6">
+                <a href="https://github.com/temesgen-nemie" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                  <FaGithub size={24} />
                 </a>
-                <a
-                  href="https://linkedin.com/in/temesgen-nemie"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2 text-blue-600 dark:text-blue-400 hover:text-blue-700"
-                  aria-label="LinkedIn"
-                >
-                  <FaLinkedin size={20} />
+                <a href="https://linkedin.com/in/temesgen-nemie" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
+                  <FaLinkedin size={24} />
                 </a>
               </div>
             </div>
