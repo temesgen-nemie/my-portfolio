@@ -13,7 +13,7 @@ const Contact = () => {
 
     try {
       const formData = new FormData(e.target);
-      const response = await fetch(import.meta.env.VITE_FORMSPREE_ENDPOINT, {
+      const response = await fetch(process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "", {
         method: "POST",
         body: formData,
         headers: {
@@ -68,7 +68,7 @@ const Contact = () => {
             <form 
               ref={form}
               onSubmit={sendEmail}
-              action={import.meta.env.VITE_FORMSPREE_ENDPOINT}
+              action={process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT}
               method="POST"
               className="space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
             >
@@ -90,6 +90,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
                   placeholder="your name"
+                  suppressHydrationWarning
                 />
               </div>
               <div>
@@ -106,6 +107,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
                   placeholder="youremail@example.com"
+                  suppressHydrationWarning
                 />
               </div>
               <div>
@@ -122,6 +124,7 @@ const Contact = () => {
                   required
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
                   placeholder="Hello, I'd like to talk about..."
+                  suppressHydrationWarning
                 ></textarea>
               </div>
               <motion.button
@@ -134,6 +137,7 @@ const Contact = () => {
                     ? 'bg-blue-400 cursor-not-allowed' 
                     : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-blue-500/30'
                 }`}
+                suppressHydrationWarning
               >
                 {isSending ? (
                   'Sending...'

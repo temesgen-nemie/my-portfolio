@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import mypic from "../assets/img.jpg";
-import mycv from "../assets/Temesgen_Nemie_Updated_CV.pdf";
+const mypic = "/assets/img.jpg";
+const mycv = "/assets/Temesgen_Nemie_Updated_CV.pdf";
 
 const Hero = () => {
   const [isHydrated, setIsHydrated] = useState(false);
@@ -60,6 +60,7 @@ const Hero = () => {
               href={mycv}
               download="Temesgen_Nemie_Updated_CV.pdf"
               className="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition text-center flex items-center justify-center gap-2"
+              suppressHydrationWarning
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

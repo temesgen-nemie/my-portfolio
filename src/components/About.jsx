@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
 import { FiX } from "react-icons/fi";
-import internshipCert from "../assets/internship.jpg";
-import projectCert from "../assets/project.jpg";
-import tempo from "../assets/Tempo.jpg";
-import cisco from "../assets/cisco.jpg";
+const internshipCert = "/assets/internship.jpg";
+const projectCert = "/assets/project.jpg";
+const tempo = "/assets/Tempo.jpg";
+const cisco = "/assets/cisco.jpg";
 
 const About = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
@@ -117,6 +117,7 @@ const About = () => {
                     onClick={() => openModal(cert)}
                     className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all"
                     aria-label={`View ${cert.title} certificate`}
+                    suppressHydrationWarning
                   >
                     <img
                       src={cert.image}
@@ -132,6 +133,7 @@ const About = () => {
                     <button
                       onClick={() => openModal(cert)}
                       className="text-left text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium"
+                      suppressHydrationWarning
                     >
                       {cert.description}
                     </button>

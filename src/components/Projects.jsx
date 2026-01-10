@@ -1,8 +1,8 @@
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { motion } from "framer-motion";
-import donationplatform from "../assets/donationplatform.png";
-import nuevent from "../assets/nuevent.jpg";
-import AIindisease from "../assets/AI in disease.png";
+const donationplatform = "/assets/donationplatform.png";
+const nuevent = "/assets/nuevent.jpg";
+const AIindisease = "/assets/AI in disease.png";
 import { useState, useEffect } from "react";
 
 const Projects = () => {
@@ -112,6 +112,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
                     aria-label={`View ${project.title} code on GitHub`}
+                    suppressHydrationWarning
                   >
                     <FiGithub className="mr-2 text-gray-700 dark:text-gray-300" />
                     <span className="text-gray-700 dark:text-gray-300">View Code</span>
@@ -124,6 +125,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="flex items-center px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-700 transition-colors"
                     aria-label={`View ${project.title} live demo`}
+                    suppressHydrationWarning
                   >
                     <FiExternalLink className="mr-2" />
                     <span>Live Demo</span>

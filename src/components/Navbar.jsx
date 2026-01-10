@@ -74,6 +74,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.9 }}
                 className="p-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 rounded-full"
                 aria-label="Toggle dark mode"
+                suppressHydrationWarning
               >
                 {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
               </motion.button>
@@ -109,6 +110,7 @@ const Navbar = () => {
               onClick={() => setDarkMode(!darkMode)}
               className="p-2 text-gray-700 dark:text-gray-300"
               aria-label="Toggle dark mode"
+              suppressHydrationWarning
             >
               {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
@@ -116,6 +118,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 dark:text-gray-300 p-2"
               aria-label="Toggle menu"
+              suppressHydrationWarning
             >
               {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
