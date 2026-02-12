@@ -1,25 +1,7 @@
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { socialLinks } from "../constants";
 
 const Footer = () => {
-  const socialLinks = [
-    {
-      icon: <FaGithub className="text-xl" />,
-      url: "https://github.com/temesgen-nemie",
-      name: "GitHub"
-    },
-    {
-      icon: <FaLinkedin className="text-xl" />,
-      url: "https://linkedin.com/in/temesgen-nemie",
-      name: "LinkedIn"
-    },
-    {
-      icon: <FaEnvelope className="text-xl" />,
-      url: "mailto:temesgennemie@gmail.com",
-      name: "Email"
-    }
-  ];
-
   return (
     <footer className="bg-gray-50 dark:bg-gray-900/50 pt-12 pb-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,7 +45,7 @@ const Footer = () => {
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors duration-300 transform hover:scale-110"
                 aria-label={link.name}
               >
-                {link.icon}
+                <link.icon size={20} />
               </motion.a>
             ))}
           </div>

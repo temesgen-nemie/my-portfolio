@@ -1,33 +1,35 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiMoon, FiSun } from "react-icons/fi";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { navLinks, socialLinks } from "../constants";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Dark mode toggle
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
+    if (mounted) {
+      document.documentElement.classList.toggle("dark", darkMode);
+    }
+  }, [darkMode, mounted]);
 
   // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ];
+  if (!mounted) return null;
 
   return (
     <motion.nav
@@ -79,7 +81,6 @@ const Navbar = () => {
               onClick={() => setDarkMode(!darkMode)}
               className="p-2 text-gray-600 dark:text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
               aria-label="Toggle dark mode"
-              suppressHydrationWarning
             >
               {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
@@ -87,26 +88,19 @@ const Navbar = () => {
             <div className="h-6 w-px bg-gray-300 dark:bg-white/10" />
 
             <div className="flex space-x-2">
-              <motion.a
-                href="https://github.com/temesgen-nemie"
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ y: -2 }}
-                className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
-                aria-label="GitHub"
-              >
-                <FaGithub size={20} />
-              </motion.a>
-              <motion.a
-                href="https://linkedin.com/in/temesgen-nemie"
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ y: -2 }}
-                className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin size={20} />
-              </motion.a>
+              {socialLinks.filter(link => link.name !== "Email").map((social) => (
+                <motion.a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{ y: -2 }}
+                  className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                  aria-label={social.name}
+                >
+                  <social.icon size={20} />
+                </motion.a>
+              ))}
             </div>
           </div>
 
@@ -116,7 +110,6 @@ const Navbar = () => {
               onClick={() => setDarkMode(!darkMode)}
               className="text-gray-600 dark:text-gray-400 hover:text-yellow-500 dark:hover:text-yellow-300 transition-colors"
               aria-label="Toggle dark mode"
-              suppressHydrationWarning
             >
               {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
             </button>
@@ -124,7 +117,6 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white transition-colors focus:outline-none"
               aria-label="Toggle menu"
-              suppressHydrationWarning
             >
               {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
@@ -157,12 +149,18 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <div className="pt-4 mt-2 border-t border-gray-200 dark:border-white/10 flex justify-center space-x-6">
-                <a href="https://github.com/temesgen-nemie" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
-                  <FaGithub size={24} />
-                </a>
-                <a href="https://linkedin.com/in/temesgen-nemie" target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">
-                  <FaLinkedin size={24} />
-                </a>
+                {socialLinks.filter(link => link.name !== "Email").map((social) => (
+                  <a 
+                    key={social.name}
+                    href={social.url} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                    aria-label={social.name}
+                  >
+                    <social.icon size={24} />
+                  </a>
+                ))}
               </div>
             </div>
           </motion.div>
