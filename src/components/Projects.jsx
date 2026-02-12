@@ -1,48 +1,9 @@
-import { FiGithub, FiExternalLink, FiArrowRight } from "react-icons/fi";
+import { FiGithub, FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-
-const donationplatform = "/assets/donationplatform.png";
-const nuevent = "/assets/nuevent.jpg";
-const AIindisease = "/assets/AI in disease.png";
+import { projects } from "../constants";
+import Image from "next/image";
 
 const Projects = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  const projects = [
-    {
-      title: "Donation Platform",
-      description: "A transparent digital ecosystem connecting donors, NGOs, and volunteers to facilitate impactful giving.",
-      tech: ["React", "Node.js", "Express"],
-      github: "https://github.com/temesgen-nemie/Online-Donation-Platform-through-NGOs",
-      demo: "https://donate-link.netlify.app/",
-      image: donationplatform,
-      color: "from-blue-500 to-cyan-500"
-    },
-    {
-      title: "NU EVENT",
-      description: "Comprehensive event management and ticketing solution handling complex scheduling and bookings.",
-      tech: ["Next.js", "Tailwind", "TypeScript"],
-      github: "https://github.com/temesgen-nemie/nuevents-project",
-      demo: "https://github.com/temesgen-nemie/nuevents-project",
-      image: nuevent,
-      color: "from-purple-500 to-pink-500"
-    },
-    {
-      title: "AI Disease Surveillance",
-      description: "Early warning system utilizing predictive analytics for rapid disease detection and response.",
-      tech: ["React", "AI/ML", "Data Viz"],
-      github: "#",
-      demo: "#",
-      image: AIindisease,
-      color: "from-emerald-500 to-teal-500"
-    },
-  ];
-
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
@@ -80,21 +41,29 @@ const Projects = () => {
               whileHover={{ y: -10 }}
               className="group relative"
             >
-              {/* Glow Effect */}
               <div className={`absolute -inset-1 rounded-2xl bg-gradient-to-r ${project.color} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
               
               <div className="relative glass h-full rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 flex flex-col">
-                {/* Image Container with Overlay */}
-                <div className="relative h-56 overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-b ${project.color} mix-blend-overlay opacity-20 z-10`} />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-transparent dark:from-[#030014] dark:via-transparent dark:to-transparent z-10" />
+                <div className="relative h-64 overflow-hidden bg-gray-100/50 dark:bg-white/5">
+                  {/* Blurred background for inconsistent aspect ratios */}
+                  <div className="absolute inset-0 blur-2xl opacity-20 scale-110">
+                    <Image
+                      src={project.image}
+                      alt=""
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  <div className="relative h-full w-full p-4 z-10 flex items-center justify-center">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-contain transform group-hover:scale-110 transition-transform duration-700 p-2"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent dark:from-[#030014]/40 dark:via-transparent dark:to-transparent z-20" />
                 </div>
 
                 <div className="p-6 flex-grow flex flex-col">

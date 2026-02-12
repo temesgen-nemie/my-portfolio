@@ -1,22 +1,17 @@
-import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import { FaGithub, FaLinkedin, FaArrowRight } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { socialLinks } from "../constants";
+import Image from "next/image";
 
 const mypic = "/assets/img.jpg";
 const mycv = "/assets/Temesgen_Nemie_Updated_CV.pdf";
 
 const Hero = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
   return (
     <section
       id="home"
-      className="release relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600/20 rounded-full blur-[100px] animate-pulse" />
@@ -43,22 +38,20 @@ const Hero = () => {
             </h1>
 
             <div className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-300 mb-8 h-12">
-              {isHydrated && (
-                <TypeAnimation
-                  sequence={[
-                    "Software Engineer",
-                    2000,
-                    "Frontend Developer",
-                    2000,
-                    "Problem Solver",
-                    2000,
-                  ]}
-                  wrapper="span"
-                  speed={50}
-                  repeat={Infinity}
-                  className="text-cyan-600 dark:text-cyan-400"
-                />
-              )}
+              <TypeAnimation
+                sequence={[
+                  "Software Engineer",
+                  2000,
+                  "Full Stack Developer",
+                  2000,
+                  "Problem Solver",
+                  2000,
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+                className="text-cyan-600 dark:text-cyan-400"
+              />
             </div>
 
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed">
@@ -81,23 +74,20 @@ const Hero = () => {
                 href={mycv}
                 download="Temesgen_Nemie_Updated_CV.pdf"
                 className="px-8 py-4 glass text-gray-900 dark:text-white rounded-full font-semibold hover:bg-gray-100/50 dark:hover:bg-white/10 transition-all hover:scale-105 flex items-center gap-2 border border-gray-200 dark:border-white/10"
-                suppressHydrationWarning
               >
                 Download CV
               </a>
             </div>
 
             <div className="mt-12 flex justify-center md:justify-start gap-6">
-              {[
-                { icon: FaGithub, href: "https://github.com/temesgen-nemie" },
-                { icon: FaLinkedin, href: "https://linkedin.com/in/temesgen-nemie" }
-              ].map((social, index) => (
+              {socialLinks.filter(l => l.name !== "Email").map((social, index) => (
                 <a
                   key={index}
-                  href={social.href}
+                  href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-white transition-colors transform hover:-translate-y-1"
+                  aria-label={social.name}
                 >
                   <social.icon size={28} />
                 </a>
@@ -119,11 +109,13 @@ const Hero = () => {
             </div>
 
             <div className="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden border-4 border-white/20 dark:border-white/10 shadow-2xl shadow-purple-500/20 z-10 glass">
-              <img
+              <Image
                 src={mypic}
                 alt="Temesgen Nemie"
+                width={400}
+                height={400}
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                loading="eager"
+                priority
               />
             </div>
             

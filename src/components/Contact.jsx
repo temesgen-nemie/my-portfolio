@@ -1,64 +1,29 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { FiMail, FiMapPin, FiPhone, FiSend, FiCoffee } from "react-icons/fi";
+import { FiSend, FiCoffee } from "react-icons/fi";
+import { contactInfo } from "../constants";
 
 const Contact = () => {
-  const [isHydrated, setIsHydrated] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const formRef = useRef(null);
 
-  useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
-    
+
     // Simulate form submission delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // In a real app, you would send the data here.
-    // For now, we simulate success.
-   
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
     setIsSending(false);
     setIsSent(true);
     formRef.current.reset();
     setTimeout(() => setIsSent(false), 5000);
   };
 
-  const contactInfo = [
-    {
-      icon: <FiMail />,
-      title: "Email",
-      value: "temen9020@gmail.com",
-      link: "mailto:temen9020@gmail.com",
-      color: "text-blue-500",
-      bg: "bg-blue-500/10"
-    },
-    {
-      icon: <FiPhone />,
-      title: "Phone",
-      value: "+251962187032",
-      link: "tel:+251962187032",
-      color: "text-purple-500",
-      bg: "bg-purple-500/10"
-    },
-    {
-      icon: <FiMapPin />,
-      title: "Location",
-      value: "Addis Ababa, Ethiopia",
-      link: "#",
-      color: "text-cyan-500",
-      bg: "bg-cyan-500/10"
-    }
-  ];
-
   return (
     <section id="contact" className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
           {/* Left Side - Info */}
           <motion.div
@@ -68,16 +33,22 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="inline-block px-4 py-1 rounded-full border border-blue-500/20 bg-blue-500/10 mb-6">
-              <span className="text-blue-500 font-bold tracking-wider uppercase text-sm">Get in Touch</span>
+              <span className="text-blue-500 font-bold tracking-wider uppercase text-sm">
+                Get in Touch
+              </span>
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Let's create something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">extraordinary</span> together.
+              Let&apos;s create something{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+                extraordinary
+              </span>{" "}
+              together.
             </h2>
-            
+
             <p className="text-gray-600 dark:text-gray-400 text-lg mb-12 max-w-lg leading-relaxed">
-              Have a project in mind or just want to chat about tech? 
-              I'm always open to new opportunities and interesting conversations.
+              Have a project in mind or just want to chat about tech? I&apos;m always
+              open to new opportunities and interesting conversations.
             </p>
 
             <div className="space-y-8">
@@ -88,12 +59,18 @@ const Contact = () => {
                   whileHover={{ x: 10 }}
                   className="flex items-center gap-6 group"
                 >
-                  <div className={`p-4 rounded-2xl ${info.bg} ${info.color} text-xl transition-transform group-hover:scale-110`}>
-                    {info.icon}
+                  <div
+                    className={`p-4 rounded-2xl ${info.bg} ${info.color} text-xl transition-transform group-hover:scale-110`}
+                  >
+                    <info.icon />
                   </div>
                   <div>
-                    <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">{info.title}</h3>
-                    <p className="text-gray-900 dark:text-white font-semibold text-lg">{info.value}</p>
+                    <h3 className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1">
+                      {info.title}
+                    </h3>
+                    <p className="text-gray-900 dark:text-white font-semibold text-lg">
+                      {info.value}
+                    </p>
                   </div>
                 </motion.a>
               ))}
@@ -125,7 +102,10 @@ const Contact = () => {
 
               <div className="space-y-6">
                 <div className="group">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 group-focus-within:text-blue-500 transition-colors">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 group-focus-within:text-blue-500 transition-colors"
+                  >
                     Your Name
                   </label>
                   <input
@@ -135,12 +115,14 @@ const Contact = () => {
                     required
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
                     placeholder="your name"
-                    suppressHydrationWarning
                   />
                 </div>
 
                 <div className="group">
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 group-focus-within:text-blue-500 transition-colors">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 group-focus-within:text-blue-500 transition-colors"
+                  >
                     Email Address
                   </label>
                   <input
@@ -150,12 +132,14 @@ const Contact = () => {
                     required
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
                     placeholder="youremail@example.com"
-                    suppressHydrationWarning
                   />
                 </div>
 
                 <div className="group">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 group-focus-within:text-blue-500 transition-colors">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 group-focus-within:text-blue-500 transition-colors"
+                  >
                     Message
                   </label>
                   <textarea
@@ -165,7 +149,6 @@ const Contact = () => {
                     rows="4"
                     className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 resize-none"
                     placeholder="Hello, I'd like to talk about..."
-                    suppressHydrationWarning
                   />
                 </div>
 
@@ -175,11 +158,10 @@ const Contact = () => {
                   type="submit"
                   disabled={isSending || isSent}
                   className={`w-full py-4 rounded-xl font-bold text-white shadow-lg flex items-center justify-center gap-2 transition-all ${
-                    isSent 
-                      ? "bg-green-500" 
+                    isSent
+                      ? "bg-green-500"
                       : "bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-blue-500/25"
                   } ${isSending ? "opacity-75 cursor-not-allowed" : ""}`}
-                  suppressHydrationWarning
                 >
                   {isSending ? (
                     "Sending..."
